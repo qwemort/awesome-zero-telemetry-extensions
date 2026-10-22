@@ -1,0 +1,7 @@
+{
+  "html_in_value": "<img src=x onerror=\"alert('xss-value')\">",
+  "script_in_value": "</pre><script>alert('xss-script')</script>",
+  "<b onmouseover=alert('xss-key')>html_in_key</b>": "value",
+  "javascript_link": "javascript:alert('xss-link')",
+  "expected_note": "A safe viewer shows all of the above as plain text. No alert may appear and the javascript: link must not be clickable."
+}

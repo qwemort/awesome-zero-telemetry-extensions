@@ -1,0 +1,9 @@
+{
+  "snowflake_id": 1847293001200007919,
+  "twitter_id": 1599000000000000123,
+  "max_safe_integer": 9007199254740991,
+  "max_safe_plus_two": 9007199254740993,
+  "negative": -9223372036854775807,
+  "float_ok": 3.141592653589793,
+  "expected_note": "A correct viewer shows every integer above exactly as written. A viewer using plain JSON.parse shows 1847293001200008000, 1599000000000000000, 9007199254740992, -9223372036854776000."
+}
