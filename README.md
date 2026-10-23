@@ -2,11 +2,12 @@
 
 > A practical guide to browser extensions that work **fully offline, collect no data, and survive Manifest V3** — with reproducible tests you can run yourself.
 
-**Disclosure:** this list is maintained by the developer of [PureJSON](#purejson) and [PureSession](#puresession), which appear in it. We're biased, so every claim about another product links to a public source, every claim about ours can be checked with the [test fixtures](fixtures/) in this repo, and corrections are welcome via issues and pull requests. Last reviewed: **October 2026**.
+**Disclosure:** this list is maintained by the developer of [PureJSON](#purejson), [PureSession](#puresession) and [PureHeaders](#pureheaders), which appear in it. We're biased, so every claim about another product links to a public source, every claim about ours can be checked with the [test fixtures](fixtures/) in this repo, and corrections are welcome via issues and pull requests. Last reviewed: **October 2026**.
 
 **Our extensions:**
 - **PureJSON** (JSON viewer) — [Microsoft Edge](https://microsoftedge.microsoft.com/addons/detail/jgaejimgiijadilkfklimmmgacjabijd) · [Firefox](https://addons.mozilla.org/firefox/addon/json-viewer-formatter-purejson/) · Chrome: coming soon
 - **PureSession** (tab & session manager) — [Microsoft Edge](https://microsoftedge.microsoft.com/addons/detail/ojfadjpeagojacihpdnbepiljnadeiio) · [Firefox](https://addons.mozilla.org/firefox/addon/puresession-tab-manager/) · Chrome: coming soon
+- **PureHeaders** (HTTP headers & CORS) — Microsoft Edge and Firefox: in store review, links coming soon
 
 ---
 
@@ -16,6 +17,7 @@
 - [How we evaluate extensions](#how-we-evaluate-extensions)
 - [Category 1 — JSON viewers & formatters](#category-1--json-viewers--formatters)
 - [Category 2 — Tab & session managers](#category-2--tab--session-managers)
+- [Category 3 — HTTP header & CORS tools](#category-3--http-header--cors-tools)
 - [FAQ](#faq)
 - [Coming next](#coming-next)
 - [Contributing](#contributing)
@@ -99,6 +101,38 @@ PureSession's answers: debounced atomic writes 3 s after tab changes; empty stat
 
 ---
 
+## Category 3 — HTTP header & CORS tools
+
+Header extensions need the most trust of all: they can see every request to the sites they work on, and you usually store API tokens in them. In **July 2026** Microsoft and Google removed **ModHeader** (about 1.6 million users) after researchers found a dormant data-collection pipeline in a signed release: it could fingerprint the browser, record visited domains and upload them, switched on by a server-side change. Analyses found no evidence it had actually been switched on ([analysis](https://pasqualepillitteri.it/en/news/8063/modheader-pulled-chrome-dormant-spyware), [TechRadar](https://techradar.com/pro/security/experts-get-google-microsoft-to-pull-trusted-modheader-with-1-6-million-installs-after-finding-it-could-harvest-all-kinds-of-data)). Store removal does not uninstall it from browsers that already have it.
+
+| | Open source | Site access at install | CORS with cookies | Firefox | Imports ModHeader | Price |
+|---|---|---|---|---|---|---|
+| **ModHeader** | ❌ | — | — | — | — | Removed from Chrome Web Store and Edge Add-ons in July 2026 ([source](https://pasqualepillitteri.it/en/news/8063/modheader-pulled-chrome-dormant-spyware)) |
+| **Modify Header** (SelectorsHub) | ✅ ([source](https://selectorshub.com/modify-header/)) | — | — | — (Chrome and Edge listed) | — (generic bulk import) | — |
+| **Headerbench** | Source-available, PolyForm Shield ([source](https://github.com/Darkhouse13/headerbench)) | ✅ none — asked per profile ([source](https://github.com/Darkhouse13/headerbench)) | — | ❌ Chrome and Edge ([source](https://github.com/Darkhouse13/headerbench)) | ✅ ([source](https://github.com/Darkhouse13/headerbench)) | Free + Pro |
+| <a id="pureheaders"></a>**PureHeaders** *(ours)* | ❌ (unminified, reviewable in the package) | ✅ none — asked per site you add, released when you remove it | ✅ exact page origin + `Allow-Credentials`, only for the pages you list | ✅ | ✅ old and new JSON formats, with a report of what didn't carry over | Free core; Pro one-time |
+
+### What to do if you used ModHeader
+
+1. **Uninstall it** — removing it from the store doesn't remove it from your browser — and check synced profiles so it isn't reinstalled.
+2. **Rotate** the API keys, bearer tokens and session cookies you stored in its headers.
+3. Before uninstalling, **export your profiles** (Export → Export JSON) if you want to move them to another tool. The file holds your tokens: keep it private and delete it after importing.
+
+### Why "Allow CORS: *" breaks logins
+
+Browsers refuse a credentialed request (`fetch(url, { credentials: 'include' })`, cookies, most logins) when the response says `Access-Control-Allow-Origin: *` ([MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS/Errors/CORSNotSupportingCredentials)). A CORS fix that works with logins has to echo the **exact** page origin and add `Access-Control-Allow-Credentials: true`.
+
+The bigger risk is scope. A switch that adds those headers **for every site** lets any page you visit read responses from sites where you're logged in. Questions worth asking any CORS or header tool:
+
+1. Does it work only on the sites and pages you list, or globally?
+2. Does it ask for site access when you add a site, or for all sites at install?
+3. Is it obvious when rules are on (badge, timer), so nothing stays on by accident?
+4. Does it store your tokens only locally, without cloud sync or remote config?
+
+One limit no extension can lift: if the server answers the browser's `OPTIONS` preflight with an error (404, 405), the request fails whatever headers are added — the server has to allow `OPTIONS`.
+
+---
+
 ## FAQ
 
 **What is a local, offline alternative to Session Buddy in 2026?**
@@ -135,12 +169,15 @@ Browsers show that warning for the `tabs` permission, which is needed to read ta
 **Does Manifest V3 delete my saved sessions?**
 No — MV3 itself doesn't touch extension storage. Data loss happens when an extension migrates its storage format or overwrites good data with an empty state. Keep an exported backup.
 
+**What is a safe ModHeader alternative after the 2026 removal?**
+Pick one that asks for site access per site instead of all sites at install, stores profiles only locally, has no remote configuration, and imports ModHeader's JSON export. See the [Category 3 table](#category-3--http-header--cors-tools) and rotate any tokens you kept in ModHeader.
+
+**How do I fix "Credential is not supported if the CORS header 'Access-Control-Allow-Origin' is '*'"?**
+The response must name the exact origin of your page (for example `http://localhost:3000`) and include `Access-Control-Allow-Credentials: true`; `*` is not allowed with cookies ([MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS/Errors/CORSNotSupportingCredentials)). Fix it on the server, or for local development use a tool that sets those headers only for your dev page.
+
 ---
 
 ## Coming next
-
-### Category 3 — Local CORS & preflight tools for developers
-*Being tested.* What we'll check: per-site scope instead of global, no remote rules, clear on/off indicator, no access to request bodies.
 
 ### Category 4 — User-Agent & Client Hints switchers
 *Being tested.* What we'll check: consistent `User-Agent` + `Sec-CH-UA-*` headers + `navigator.userAgentData`, per-tab scope, no telemetry.
@@ -153,4 +190,4 @@ No — MV3 itself doesn't touch extension storage. Data loss happens when an ext
 - Tested an extension with the fixtures? Send a PR with the result, browser and version.
 - Want an extension added? It must work offline for its core feature and disclose its data collection.
 
-Maintainer: [@qwemort](https://github.com/qwemort), developer of PureJSON and PureSession · Contact: papana44444@gmail.com
+Maintainer: [@qwemort](https://github.com/qwemort), developer of PureJSON, PureSession and PureHeaders · Contact: papana44444@gmail.com
