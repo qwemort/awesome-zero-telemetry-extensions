@@ -7,7 +7,7 @@
 **Our extensions:**
 - **PureJSON** (JSON viewer) — [Microsoft Edge](https://microsoftedge.microsoft.com/addons/detail/jgaejimgiijadilkfklimmmgacjabijd) · [Firefox](https://addons.mozilla.org/firefox/addon/json-viewer-formatter-purejson/) · Chrome: coming soon
 - **PureSession** (tab & session manager) — [Microsoft Edge](https://microsoftedge.microsoft.com/addons/detail/ojfadjpeagojacihpdnbepiljnadeiio) · [Firefox](https://addons.mozilla.org/firefox/addon/puresession-tab-manager/) · Chrome: coming soon
-- **PureHeaders** (HTTP headers & CORS) — Microsoft Edge and Firefox: in store review, links coming soon
+- **PureHeaders** (HTTP headers & CORS) — [Microsoft Edge](https://microsoftedge.microsoft.com/addons/detail/ilodajgedphnnmafkapjcldjbjbkcmfj) · Firefox: in store review · Chrome: coming soon
 
 ---
 
@@ -84,7 +84,7 @@ Chrome and Edge show raw JSON as plain text; Firefox has a built-in viewer. Exte
 | **OneTab** | Local | No | ✅ | — | — | Text import | — |
 | **Toby** | Cloud | — | Up to 60 saved tabs ([source](https://toolradar.com/tools/toby/pricing)) | $6 per member / month (≈ $72 / year) ([source](https://toolradar.com/tools/toby/pricing)) | — | — | — |
 | **Workona** | Cloud | Yes | No permanent free plan ([source](https://toolradar.com/tools/workona/pricing)) | Custom pricing ([source](https://toolradar.com/tools/workona/pricing)) | — | — | — |
-| <a id="puresession"></a>**PureSession** *(ours)* | Local (IndexedDB) | No | ✅ live tabs, sleep tabs, dedupe, sessions, crash recovery, full JSON backup | One-time Pro: auto-backups, encryption, deep search, Markdown/CSV | ✅ Chrome/Edge Side Panel, Firefox sidebar | ✅ Session Buddy, Toby, OneTab, bookmark HTML, URL lists | ✅ AES-256-GCM, PBKDF2-SHA-256 600,000 iterations |
+| <a id="puresession"></a>**PureSession** *(ours)* | Local (IndexedDB) | No | ✅ live tabs, sleep tabs, dedupe, sessions, crash recovery, automatic backups (restore the newest), 1 password-locked session, full JSON backup | One-time Pro: full backup history, unlimited encrypted sessions, deep search, Markdown/CSV | ✅ Chrome/Edge Side Panel, Firefox sidebar | ✅ Session Buddy, Toby, OneTab, bookmark HTML, URL lists | ✅ AES-256-GCM, PBKDF2-SHA-256 600,000 iterations |
 
 **OneTab note:** OneTab's own troubleshooting page warns that reinstalling the extension wipes saved data ([one-tab.com/troubleshooting](https://www.one-tab.com/troubleshooting)). Whatever manager you use, export a backup regularly.
 
