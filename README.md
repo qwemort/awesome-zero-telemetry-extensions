@@ -179,6 +179,9 @@ The response must name the exact origin of your page (for example `http://localh
 
 ## Coming next
 
+### PureMock — local API response mocking *(in development, not released)*
+A tool for changing a site's API responses in your own browser (JSON body, status code, delay) only on sites you choose, for testing and development. Same rules as the rest of this list: no account, no telemetry, everything stays local. We'll add a comparison category with public sources when it ships.
+
 ### Category 4 — User-Agent & Client Hints switchers
 *Being tested.* What we'll check: consistent `User-Agent` + `Sec-CH-UA-*` headers + `navigator.userAgentData`, per-tab scope, no telemetry.
 
