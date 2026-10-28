@@ -20,6 +20,7 @@
 - [Category 3 — HTTP header & CORS tools](#category-3--http-header--cors-tools)
 - [FAQ](#faq)
 - [Coming next](#coming-next)
+- [Related repositories](#related-repositories)
 - [Contributing](#contributing)
 
 ---
@@ -184,6 +185,15 @@ A tool for changing a site's API responses in your own browser (JSON body, statu
 
 ### Category 4 — User-Agent & Client Hints switchers
 *Being tested.* What we'll check: consistent `User-Agent` + `Sec-CH-UA-*` headers + `navigator.userAgentData`, per-tab scope, no telemetry.
+
+---
+
+## Related repositories
+
+Small, dependency-free companions by the same maintainer, useful with or without any extension on this list:
+
+- [**api-error-fixtures**](https://github.com/qwemort/api-error-fixtures): 21 ready-made API responses (429 with `Retry-After`, HTML 502, `null` fields, huge IDs, GraphQL errors with HTTP 200) and a tiny local server, for testing frontend error states.
+- [**cors-errors-explained**](https://github.com/qwemort/cors-errors-explained): the common CORS console errors, their causes and fixes, with a runnable demo that reproduces each one.
 
 ---
 
