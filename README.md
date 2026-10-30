@@ -7,7 +7,7 @@
 **Our extensions:**
 - **PureJSON** (JSON viewer) — [Microsoft Edge](https://microsoftedge.microsoft.com/addons/detail/jgaejimgiijadilkfklimmmgacjabijd) · [Firefox](https://addons.mozilla.org/firefox/addon/json-viewer-formatter-purejson/) · Chrome: coming soon
 - **PureSession** (tab & session manager) — [Microsoft Edge](https://microsoftedge.microsoft.com/addons/detail/ojfadjpeagojacihpdnbepiljnadeiio) · [Firefox](https://addons.mozilla.org/firefox/addon/puresession-tab-manager/) · Chrome: coming soon
-- **PureHeaders** (HTTP headers & CORS) — [Microsoft Edge](https://microsoftedge.microsoft.com/addons/detail/ilodajgedphnnmafkapjcldjbjbkcmfj) · Firefox: in store review · Chrome: coming soon
+- **PureHeaders** (HTTP headers & CORS) — [Microsoft Edge](https://microsoftedge.microsoft.com/addons/detail/ilodajgedphnnmafkapjcldjbjbkcmfj) · [Firefox](https://addons.mozilla.org/firefox/addon/pureheaders-modify-headers/) · [Chrome](https://chromewebstore.google.com/detail/flplhcopkoiihcapihkljhjaminhpink)
 
 ---
 
