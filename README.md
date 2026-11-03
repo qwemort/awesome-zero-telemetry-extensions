@@ -2,12 +2,15 @@
 
 > A practical guide to browser extensions that work **fully offline, collect no data, and survive Manifest V3** — with reproducible tests you can run yourself.
 
-**Disclosure:** this list is maintained by the developer of [PureJSON](#purejson), [PureSession](#puresession) and [PureHeaders](#pureheaders), which appear in it. We're biased, so every claim about another product links to a public source, every claim about ours can be checked with the [test fixtures](fixtures/) in this repo, and corrections are welcome via issues and pull requests. Last reviewed: **October 2026**.
+**Disclosure:** this list is maintained by the developer of [PureJSON](#purejson), [PureSession](#puresession), [PureHeaders](#pureheaders), [PureMock](#puremock) and the single-purpose tools in [Category 5](#category-5--single-purpose-page-tools), which appear in it. We're biased, so every claim about another product links to a public source, every claim about ours can be checked with the [test fixtures](fixtures/) in this repo, and corrections are welcome via issues and pull requests. Last reviewed: **November 2026**.
 
 **Our extensions:**
 - **PureJSON** (JSON viewer) — [Microsoft Edge](https://microsoftedge.microsoft.com/addons/detail/jgaejimgiijadilkfklimmmgacjabijd) · [Firefox](https://addons.mozilla.org/firefox/addon/json-viewer-formatter-purejson/) · Chrome: coming soon
 - **PureSession** (tab & session manager) — [Microsoft Edge](https://microsoftedge.microsoft.com/addons/detail/ojfadjpeagojacihpdnbepiljnadeiio) · [Firefox](https://addons.mozilla.org/firefox/addon/puresession-tab-manager/) · Chrome: coming soon
 - **PureHeaders** (HTTP headers & CORS) — [Microsoft Edge](https://microsoftedge.microsoft.com/addons/detail/ilodajgedphnnmafkapjcldjbjbkcmfj) · [Firefox](https://addons.mozilla.org/firefox/addon/pureheaders-modify-headers/) · [Chrome](https://chromewebstore.google.com/detail/flplhcopkoiihcapihkljhjaminhpink)
+- **PureMock** (API response mocking) — Microsoft Edge Add-ons and Firefox Add-ons (search “PureMock”; direct links will be added) · Chrome: coming soon
+- **Pure Spoiler Shield** (spoiler filter for YouTube, Reddit and X) — [Chrome](https://chromewebstore.google.com/detail/aloilpojkoblacapdlknacjiljgjibng) · Firefox: in review · Edge: not yet
+- **Pure Copy Unlock** (restore text selection and copying) and **Pure Tables** (page tables to CSV / Excel) — not yet in the stores
 
 ---
 
@@ -18,6 +21,8 @@
 - [Category 1 — JSON viewers & formatters](#category-1--json-viewers--formatters)
 - [Category 2 — Tab & session managers](#category-2--tab--session-managers)
 - [Category 3 — HTTP header & CORS tools](#category-3--http-header--cors-tools)
+- [Category 4 — API response mocking](#category-4--api-response-mocking)
+- [Category 5 — Single-purpose page tools](#category-5--single-purpose-page-tools)
 - [FAQ](#faq)
 - [Coming next](#coming-next)
 - [Related repositories](#related-repositories)
@@ -69,7 +74,9 @@ Chrome and Edge show raw JSON as plain text; Firefox has a built-in viewer. Exte
 | **JSON Formatter** (Chrome Web Store) | ❌ closed in 2026 ([source](https://wesbos.com/json-alexander)) | ⚠️ tracking & injected prompts reported ([source](https://wesbos.com/json-alexander)) | — | — | — | Free |
 | **JSON Formatter** (arnav-kr fork) | ✅ | ✅ none reported | — | reported slow above ~5 MB ([source](https://dev.to/wayknow123/i-tested-every-json-viewer-after-the-formatter-scandal-heres-what-i-found-4dcl)) | — | Free |
 | **JSON Alexander** (Wes Bos) | ✅ ([source](https://wesbos.com/json-alexander)) | ✅ none | — | — | — | Free |
-| <a id="purejson"></a>**PureJSON** *(ours)* | ❌ (unminified, reviewable in the package) | ✅ none; only request is an opt-in license check | ✅ custom parser keeps the exact source digits | ✅ lazy rendering; tested with 21 MB / 120k records | CSV, Excel-friendly CSV, TSV, TypeScript (Pro) | Free core; Pro one-time |
+| <a id="purejson"></a>**PureJSON** *(ours)* | ❌ (unminified, reviewable in the package) | ✅ no telemetry; only request is an opt-in license check. ⚠️ Content script on all pages (`<all_urls>`), see note below | ✅ custom parser keeps the exact source digits | ✅ lazy rendering; tested with 21 MB / 120k records | CSV, Excel-friendly CSV, TSV, TypeScript (Pro) | Free core; Pro one-time |
+
+**Our own `<all_urls>` content script, stated plainly.** PureJSON loads a content script on every page at `document_end` so it can recognise raw JSON. The script checks the document first and does nothing unless the page is JSON or plain text that starts with `{` or `[`; normal HTML pages are not touched. Its permissions are `storage` and `clipboardWrite`, and the only host permission is `api.gumroad.com` for the optional license check. This is the same kind of access this list flags in other JSON viewers, so judge it by the code (the package is unminified) and by the developer's track record.
 
 ### Why big numbers break in most JSON viewers
 
@@ -134,6 +141,39 @@ One limit no extension can lift: if the server answers the browser's `OPTIONS` p
 
 ---
 
+## Category 4 — API response mocking
+
+These extensions change what a site's API returns inside your own browser (status, body, delay) so you can test error states and empty data without touching the backend. To do that they have to sit between the page and the network, so the same trust questions apply as for header tools: which sites can they touch, is that asked at install or per site, do they need an account, and do they send your rules anywhere?
+
+Prices and limits below were checked against the linked pages on **4 November 2026** and change often.
+
+| | Where rules live | Account needed | Free tier | Paid | Site access at install | Firefox |
+|---|---|---|---|---|---|---|
+| **Requestly** | — | The pricing page does not say whether the extension needs one ([source](https://requestly.com/pricing)) | No free plan listed; 30-day trial ([source](https://requestly.com/pricing)) | Team $10, Team Pro $15 per user per month, billed annually ([source](https://requestly.com/pricing)) | — | Extension links for Chrome, Edge, Firefox and Safari ([source](https://requestly.com/pricing)) |
+| **Tweak** | Local, no proxy (aggregator listing, [source](https://toolradar.com/tools/tweak/pricing)) | — | Up to 12 mock/modify rules ([source](https://toolradar.com/tools/tweak/pricing)) | $36 per year, annual only ([source](https://toolradar.com/tools/tweak/pricing)) | — | Listed for Chrome, Edge and Firefox ([source](https://toolradar.com/tools/tweak/pricing)) |
+| **Mokku** ([Edge listing](https://microsoftedge.microsoft.com/addons/detail/mokku-mock-api-calls-sea/ekcbmjnnnphonejedibidifflhljbobc)) | Rules are set in a DevTools panel | — | — | — | — | — |
+| <a id="puremock"></a>**PureMock** *(ours)* | Local (extension storage) | No | ✅ up to 12 rules; `fetch` and `XMLHttpRequest`, status, body, headers, delay | One-time Pro: no rule limit, GraphQL, partial mocking, random failures, templates, groups, HAR import | ✅ none: site access is asked per site (optional host permission); install-time host permission is only `api.gumroad.com` for the optional license check | ✅ (Firefox 142+) |
+
+**How PureMock limits scope:** it patches `fetch` and `XMLHttpRequest` in the page only on sites you have allowed, and only while rules are on. Requested permissions: `storage`, `scripting`, `activeTab`, `sidePanel`. No analytics and no remote configuration.
+
+Cells marked **—** mean *not yet tested by us* or not stated on the source we checked. Corrections are welcome.
+
+If you only need ready-made error responses to feed any of these tools (or Playwright, MSW, Cypress), see [api-error-fixtures](https://github.com/qwemort/api-error-fixtures).
+
+---
+
+## Category 5 — Single-purpose page tools
+
+Small extensions that do one thing on the current page and need no account. We have not yet researched competitors for these, so this table covers only our own tools and what you can verify about them. If you maintain or know a comparable zero-telemetry tool, open a PR.
+
+| | What it does | Permissions | Network | Status |
+|---|---|---|---|---|
+| **Pure Spoiler Shield** *(ours)* | Blurs or hides posts, comments and suggestions that look like spoilers for the titles you pick, on YouTube, Reddit and X. 35 ready-made lists and 3 custom titles are free; one-time Pro adds all sites, “watched up to episode N”, release dates and trusted channels. Not affiliated with Rockstar Games or Take-Two Interactive. | `storage`, `scripting`, `contextMenus`; content scripts only on YouTube, Reddit and X; optional all-sites access for Pro | Only the optional Gumroad license check | [Chrome](https://chromewebstore.google.com/detail/aloilpojkoblacapdlknacjiljgjibng); Firefox in review |
+| **Pure Copy Unlock** *(ours)* | On click, restores text selection, copying and right-click on pages that block them; optional stronger mode. Free. | `activeTab`, `scripting`, `storage`; no host permissions and no content scripts | None | Not yet published |
+| **Pure Tables** *(ours)* | On click, finds tables on the page and exports them to CSV, Excel (.xlsx) or the clipboard. Free. | `activeTab`, `scripting`, `storage`; no host permissions and no content scripts | None | Not yet published |
+
+---
+
 ## FAQ
 
 **What is a local, offline alternative to Session Buddy in 2026?**
@@ -173,6 +213,9 @@ No — MV3 itself doesn't touch extension storage. Data loss happens when an ext
 **What is a safe ModHeader alternative after the 2026 removal?**
 Pick one that asks for site access per site instead of all sites at install, stores profiles only locally, has no remote configuration, and imports ModHeader's JSON export. See the [Category 3 table](#category-3--http-header--cors-tools) and rotate any tokens you kept in ModHeader.
 
+**How can I test my frontend's error handling without changing the backend?**
+Return realistic failures from a local stub ([api-error-fixtures](https://github.com/qwemort/api-error-fixtures)) or change the real responses in your browser with a mocking extension ([Category 4](#category-4--api-response-mocking)). Test at least a 429 with `Retry-After`, an HTML 502, `null` fields and an HTTP 200 that carries an error.
+
 **How do I fix "Credential is not supported if the CORS header 'Access-Control-Allow-Origin' is '*'"?**
 The response must name the exact origin of your page (for example `http://localhost:3000`) and include `Access-Control-Allow-Credentials: true`; `*` is not allowed with cookies ([MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS/Errors/CORSNotSupportingCredentials)). Fix it on the server, or for local development use a tool that sets those headers only for your dev page.
 
@@ -180,10 +223,7 @@ The response must name the exact origin of your page (for example `http://localh
 
 ## Coming next
 
-### PureMock — local API response mocking *(in development, not released)*
-A tool for changing a site's API responses in your own browser (JSON body, status code, delay) only on sites you choose, for testing and development. Same rules as the rest of this list: no account, no telemetry, everything stays local. We'll add a comparison category with public sources when it ships.
-
-### Category 4 — User-Agent & Client Hints switchers
+### Category 6 — User-Agent & Client Hints switchers
 *Being tested.* What we'll check: consistent `User-Agent` + `Sec-CH-UA-*` headers + `navigator.userAgentData`, per-tab scope, no telemetry.
 
 ---
@@ -203,4 +243,4 @@ Small, dependency-free companions by the same maintainer, useful with or without
 - Tested an extension with the fixtures? Send a PR with the result, browser and version.
 - Want an extension added? It must work offline for its core feature and disclose its data collection.
 
-Maintainer: [@qwemort](https://github.com/qwemort), developer of PureJSON, PureSession and PureHeaders · Contact: papana44444@gmail.com
+Maintainer: [@qwemort](https://github.com/qwemort), developer of PureJSON, PureSession, PureHeaders, PureMock and the tools in Category 5 · Contact: papana44444@gmail.com
