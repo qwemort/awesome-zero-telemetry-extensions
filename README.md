@@ -8,7 +8,7 @@
 - **PureJSON** (JSON viewer) — [Microsoft Edge](https://microsoftedge.microsoft.com/addons/detail/jgaejimgiijadilkfklimmmgacjabijd) · [Firefox](https://addons.mozilla.org/firefox/addon/json-viewer-formatter-purejson/) · Chrome: coming soon
 - **PureSession** (tab & session manager) — [Microsoft Edge](https://microsoftedge.microsoft.com/addons/detail/ojfadjpeagojacihpdnbepiljnadeiio) · [Firefox](https://addons.mozilla.org/firefox/addon/puresession-tab-manager/) · Chrome: coming soon
 - **PureHeaders** (HTTP headers & CORS) — [Microsoft Edge](https://microsoftedge.microsoft.com/addons/detail/ilodajgedphnnmafkapjcldjbjbkcmfj) · [Firefox](https://addons.mozilla.org/firefox/addon/pureheaders-modify-headers/) · [Chrome](https://chromewebstore.google.com/detail/flplhcopkoiihcapihkljhjaminhpink)
-- **PureMock** (API response mocking) — Microsoft Edge Add-ons and Firefox Add-ons (search “PureMock”; direct links will be added) · Chrome: coming soon
+- **PureMock** (API response mocking) — [Microsoft Edge](https://microsoftedge.microsoft.com/addons/detail/abdckmklfnkmimofdnbfdahnepfedjbc) · [Firefox](https://addons.mozilla.org/firefox/addon/mock-api-responses-puremock/) · Chrome: coming soon
 - **Pure Spoiler Shield** (spoiler filter for YouTube, Reddit and X) — [Chrome](https://chromewebstore.google.com/detail/aloilpojkoblacapdlknacjiljgjibng) · Firefox: in review · Edge: not yet
 - **Pure Copy Unlock** (restore text selection and copying) and **Pure Tables** (page tables to CSV / Excel) — not yet in the stores
 
